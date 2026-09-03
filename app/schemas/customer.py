@@ -24,3 +24,11 @@ class CustomerResponse(BaseModel):
     updated_at: datetime
 
     model_config = ConfigDict(from_attributes=True)  # this allows Pydantic to read data from ORM models directly, enabling seamless conversion between SQLAlchemy models and Pydantic schemas.
+
+
+class CustomerListResponse(BaseModel):
+    customers: list[CustomerResponse]
+    total: int
+    page: int
+    page_size: int
+    pages: int
