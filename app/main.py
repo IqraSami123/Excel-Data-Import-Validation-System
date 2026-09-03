@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from app.database import engine
+from app.api.customers import router as customer_router
 
 app = FastAPI(
     title="Excel Data Import & Validation System",
@@ -7,6 +8,7 @@ app = FastAPI(
     description="System for customer management and large-scale Excel data imports.",
 )
 
+app.include_router(customer_router)
 
 @app.get("/")
 def health_check():
