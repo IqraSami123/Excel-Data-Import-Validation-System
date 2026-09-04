@@ -52,3 +52,7 @@ def get_customers(
         "page_size": page_size,
         "pages": pages,
     }
+
+
+def get_customer(db: Session, customer_id: int) -> Customer | None:
+    return db.get(Customer, customer_id)
