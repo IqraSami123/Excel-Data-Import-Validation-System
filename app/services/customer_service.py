@@ -30,9 +30,9 @@ def get_customers(
     page: int,
     page_size: int,
 ):
-    offset = (page - 1) * page_size
+    offset = (page - 1) * page_size     
 
-    total = db.scalar(
+    total = db.scalar(       # counts the totla number of customers from table usinf sqlalchemy's functions
         select(func.count()).select_from(Customer)
     )
 
@@ -43,7 +43,7 @@ def get_customers(
         .limit(page_size)
     ).all()
 
-    pages = (total + page_size - 1) // page_size
+    pages = (total + page_size - 1) // page_size    # this calculates the total number of pages    
 
     return {
         "customers": customers,
