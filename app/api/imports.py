@@ -7,6 +7,7 @@ from sqlalchemy.orm import Session
 from app.database import get_db
 from app.schemas.import_job import ImportJobResponse
 from app.services.import_service import create_import_job
+from app.tasks.import_tasks import process_import_job
 
 
 router = APIRouter(
@@ -48,6 +49,11 @@ def upload_excel(
     import_job = create_import_job(
         db=db,
         filename=file.filename,
+    )
+
+    process_import_job.delay(
+        import_job.id,
+        str(file_path),
     )
 
     return import_job
