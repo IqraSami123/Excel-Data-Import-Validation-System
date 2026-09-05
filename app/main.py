@@ -1,13 +1,13 @@
 from fastapi import FastAPI
 from app.database import engine
 from app.api.customers import router as customer_router
-
+from app.api.imports import router as import_router
 app = FastAPI(
     title="Excel Data Import & Validation System",
     version="1.0.0",
     description="System for customer management and large-scale Excel data imports.",
 )
-
+app.include_router(import_router)
 app.include_router(customer_router)
 
 @app.get("/")
