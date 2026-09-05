@@ -16,5 +16,14 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
+
+  redis:
+    image: redis:7
+    container_name: excel_import_redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+
+      
 volumes:                          # data will be saved even after container stopped 
   postgres_data:
